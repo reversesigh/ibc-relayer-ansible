@@ -19,5 +19,6 @@ memo_prefix = '{{ memo }}'
 [chains.packet_filter]
 policy = 'allow'
 list = [
-  ['transfer', '*'],
+  ['transfer', 'channel-1'], # Osmosis
+  ['transfer', 'channel-18'], # Juno
 ]

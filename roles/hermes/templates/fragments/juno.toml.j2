@@ -23,6 +23,14 @@ trust_threshold = { numerator = '1', denominator = '3' }
 [chains.packet_filter]
 policy = 'allow'
 list = [
-  ['transfer', '*'],
+  ['transfer', 'channel-0'], # Osmosis
+  ['transfer', 'channel-1'], # Atom
+  ['transfer', 'channel-27'], # Terra2
+  ['transfer', 'channel-28'], # Chihuahua
+  ['transfer', 'channel-29'], # Akash
+  ['transfer', 'channel-36'], # Comdex
   ['wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn', 'channel-47'], # Osmosis-CW20
+  ['transfer', 'channel-48'], # Secret
+  ['transfer', 'channel-50'], # Bitcanna
+  ['transfer', 'channel-87'], # Kujira
 ]

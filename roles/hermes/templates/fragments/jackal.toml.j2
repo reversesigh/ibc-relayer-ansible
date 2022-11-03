@@ -1,22 +1,22 @@
 [[chains]]
-id = 'kichain-2'
+id = 'jackal-1'
 {% include 'fragments/ports.toml.j2' %}
 
 
 rpc_timeout = '20s'
-account_prefix = 'ki'
-key_name = 'relayer'
-store_prefix = 'ibc'
+account_prefix = 'jkl'
+key_name = '{{ key_name }}'
 address_type = { derivation = 'cosmos' }
-default_gas = 100000
+store_prefix = 'ibc'
+default_gas = 300000
 max_gas = 3500000
-gas_price = { price = 0.025, denom = 'uxki' }
-gas_multiplier = 1.2
+gas_price = { price = 0.002, denom = 'ujkl' }
+gas_multiplier = 1.5
 max_msg_num = 30
-max_tx_size = 2097152
-clock_drift = '15s'
+max_tx_size = 2000000
+clock_drift = '45s'
 max_block_time = '10s'
-trusting_period = '7days'
+trusting_period = '10days'
 memo_prefix = '{{ memo }}'
 trust_threshold = { numerator = '1', denominator = '3' }
 
@@ -24,5 +24,4 @@ trust_threshold = { numerator = '1', denominator = '3' }
 policy = 'allow'
 list = [
   ['transfer', 'channel-0'], # Osmosis
-  ['transfer', 'channel-8'], # Juno
 ]
