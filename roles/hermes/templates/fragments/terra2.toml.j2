@@ -4,10 +4,10 @@ id = 'phoenix-1'
 
 rpc_timeout = '20s'
 account_prefix = 'terra'
-key_name = 'terra-relayer'
+key_name = 'relayer'
 store_prefix = 'ibc'
 max_msg_num = 30
-max_tx_size = 2097152
+max_tx_size = 800000
 default_gas = 100000
 max_gas = 3500000
 gas_multiplier = 1.2
@@ -22,5 +22,5 @@ address_type = { derivation = 'cosmos' }
 [chains.packet_filter]
 policy = 'allow'
 list = [
-  ['transfer', '*'],
+  ['transfer', 'channel-45'], # Akash
 ]
