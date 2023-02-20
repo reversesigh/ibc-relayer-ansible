@@ -20,14 +20,14 @@
 - name: copy hermes config script
   template:
     src: '{{ target }}.toml.j2'
-    dest: '/home/{{ ansible_user }}/.hermes/{{ target }}.toml'
+    dest: '/home/{{ ansible_user }}/.hermes/hermes.toml'
     owner: '{{ ansible_user }}'
     group: '{{ ansible_user }}'
     mode: '0644'
 
 - name: populate hermes config
   blockinfile:
-    dest: '/home/{{ ansible_user }}/.hermes/{{ target }}.toml'
+    dest: '/home/{{ ansible_user }}/.hermes/hermes.toml'
     block: "{{ lookup('template', 'fragments/{{ item.key }}.toml.j2') }}"
     marker: '# {mark}'
     marker_begin: 'Begin block: {{ item.key }}'
@@ -38,7 +38,7 @@
   become: true
   template:
     src: 'hermes.service.j2'
-    dest: '/etc/systemd/system/hermes_{{ target }}.service'
+    dest: '/etc/systemd/system/hermes.service'
     owner: root
     group: root
     mode: '600'
@@ -53,7 +53,7 @@
 - name: start hermes service
   become: true
   systemd:
-    name: 'hermes_{{ target }}'
+    name: 'hermes'
     state: restarted
     daemon_reload: yes
     enabled: yes
