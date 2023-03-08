@@ -8,7 +8,7 @@ key_name = 'relayer'
 store_prefix = 'ibc'
 max_msg_num = 30
 max_tx_size = 800000
-default_gas = 100000
+default_gas = 300000
 max_gas = 3500000
 gas_multiplier = 1.2
 gas_price = { price = 0.015, denom = 'uluna' }
@@ -23,7 +23,6 @@ address_type = { derivation = 'cosmos' }
 policy = 'allow'
 list = [
   ['transfer', 'channel-45'], # Akash
-  # ['transfer', 'channel-42'], # Injective
   ['transfer', 'channel-78'], # Mars
   ['transfer', 'channel-46'], # Stride
   ['transfer', 'channel-86'], # Whitewhale
