@@ -22,6 +22,12 @@ trust_threshold = { numerator = '1', denominator = '3' }
 [chains.packet_filter]
 policy = 'allow'
 list = [
+  ['transfer', 'channel-139'], # Stride
+  ['transfer', 'channel-202'], # Stride
+  ['transfer', 'channel-143'], # Stride
+  ['transfer', 'channel-142'], # Stride
+  ['transfer', 'channel-140'], # Stride
+
   ['transfer', 'channel-0'], # Osmosis
   ['transfer', 'channel-1'], # Atom
   ['transfer', 'channel-28'], # Chihuahua
