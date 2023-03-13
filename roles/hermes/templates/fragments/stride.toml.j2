@@ -7,8 +7,8 @@ account_prefix = 'stride'
 key_name = 'relayer'
 store_prefix = 'ibc'
 address_type = { derivation = 'cosmos' }
-default_gas = 100000
-max_gas = 1000000
+default_gas = 150000
+max_gas = 3000000
 gas_price = { price = 0.000, denom = 'ustrd' }
 gas_multiplier = 1.2
 max_msg_num = 30
@@ -22,33 +22,37 @@ trust_threshold = { numerator = '1', denominator = '3' }
 [chains.packet_filter]
 policy = 'allow'
 list = [
-  # cosmos
   ['transfer',       'channel-0'], # Cosmos
-  ['ica.delegation', 'channel-7'], # Cosmos
-  ['ica.fee',        'channel-2'], # Cosmos
-  ['ica.withdrawal', 'channel-3'], # Cosmos
-  ['ica.redemption', 'channel-4'], # Cosmos
+  ['ica.delegation', 'channel-7'],
+  ['ica.fee',        'channel-2'],
+  ['ica.withdrawal', 'channel-3'],
+  ['ica.redemption', 'channel-4'],
 
   ['transfer',       'channel-24'], # Juno
-  ['ica.delegation', 'channel-48'], # Juno
-  ['ica.fee',        'channel-26'], # Juno
-  ['ica.withdrawal', 'channel-27'], # Juno
-  ['ica.redemption', 'channel-28'], # Juno
+  ['ica.delegation', 'channel-48'],
+  ['ica.fee',        'channel-26'],
+  ['ica.withdrawal', 'channel-27'],
+  ['ica.redemption', 'channel-28'],
 
   ['transfer',       'channel-5'],  # Osmosis
-  ['ica.delegation', 'channel-42'], # Osmosis
-  ['ica.fee',        'channel-43'], # Osmosis
-  ['ica.withdrawal', 'channel-44'], # Osmosis
-  ['ica.redemption', 'channel-45'], # Osmosis
+  ['ica.delegation', 'channel-42'],
+  ['ica.fee',        'channel-43'],
+  ['ica.withdrawal', 'channel-44'],
+  ['ica.redemption', 'channel-45'],
 
   ['transfer',       'channel-52'], # Terra2
-  ['ica.delegation', 'channel-70'], # Terra2
-  ['ica.fee',        'channel-59'], # Terra2
-  ['ica.withdrawal', 'channel-60'], # Terra2
-  ['ica.redemption', 'channel-61'], # Terra2
+  ['ica.delegation', 'channel-70'],
+  ['ica.fee',        'channel-59'],
+  ['ica.withdrawal', 'channel-60'],
+  ['ica.redemption', 'channel-61'],
+
+  ['transfer',       'channel-9'], # Evmos
+  ['ica.delegation', 'channel-62'], 
+  ['ica.fee',        'channel-63'], 
+  ['ica.withdrawal', 'channel-64'], 
+  ['ica.redemption', 'channel-65'], 
 
   ['transfer', 'channel-6'], # Injective
   ['transfer', 'channel-8'], # Kujira
-  ['transfer', 'channel-9'], # Evmos
   ['transfer', 'channel-40'], # Secret
 ]

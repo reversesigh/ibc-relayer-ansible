@@ -7,9 +7,9 @@ account_prefix = 'cosmos'
 key_name = 'relayer'
 address_type = { derivation = 'cosmos' }
 store_prefix = 'ibc'
-default_gas = 300000
+default_gas = 200000
 max_gas = 3500000
-gas_price = { price = 0.02, denom = 'uatom' }
+gas_price = { price = 0.025, denom = 'uatom' }
 gas_multiplier = 2
 max_msg_num = 30
 max_tx_size = 180000
@@ -27,9 +27,10 @@ list = [
   ['transfer', 'channel-235'], # Secret
   ['transfer', 'channel-292'], # Evmos
   ['transfer', 'channel-343'], # Kujira
-  ['transfer', 'channel-391'], # Stride
-  ['transfer', 'channel-396'], # Stride
-  ['transfer', 'channel-395'], # Stride
-  ['transfer', 'channel-392'], # Stride
-  ['transfer', 'channel-393'], # Stride
+
+  ['transfer',       'channel-391'], # Stride
+  ['ica.delegation', 'channel-396'],
+  ['ica.fee',        'channel-395'],
+  ['ica.withdrawal', 'channel-392'],
+  ['ica.redemption', 'channel-393'],
 ]
