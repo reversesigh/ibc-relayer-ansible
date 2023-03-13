@@ -20,14 +20,14 @@
 - name: copy hermes config script
   template:
     src: '{{ target }}.toml.j2'
-    dest: '/home/{{ ansible_user }}/.hermes/hermes.toml'
+    dest: '/home/{{ ansible_user }}/.hermes/config.toml'
     owner: '{{ ansible_user }}'
     group: '{{ ansible_user }}'
     mode: '0644'
 
 - name: populate hermes config
   blockinfile:
-    dest: '/home/{{ ansible_user }}/.hermes/hermes.toml'
+    dest: '/home/{{ ansible_user }}/.hermes/config.toml'
     block: "{{ lookup('template', 'fragments/{{ item.key }}.toml.j2') }}"
     marker: '# {mark}'
     marker_begin: 'Begin block: {{ item.key }}'
