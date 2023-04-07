@@ -1,0 +1,26 @@
+[[chains]]
+id = 'carbon-1'
+{% include 'ports.toml.j2' %}
+
+rpc_timeout = '20s'
+account_prefix = 'swth'
+key_name = 'relayer'
+address_type = { derivation = 'cosmos' }
+store_prefix = 'ibc'
+default_gas = 400000 #same as below, TBD
+max_gas = 5000000 #still needs to be figured out as Carbon.scan doesnt show gas used and ping.pub hasnt streamed an IBC TX yet
+gas_price = { price = 100000, denom = 'swth' } # Using USC is cheaper, 0.0001 USC - there is a whole list of options
+gas_multiplier = 1.2
+max_msg_num = 30
+max_tx_size = 500000 # any way to check this?
+clock_drift = '20s'
+max_block_time = '10s'
+trusting_period = '20days'
+memo_prefix = '{{ memo }}'
+trust_threshold = { numerator = '1', denominator = '3' }
+
+[chains.packet_filter]
+policy = 'allow'
+list = [
+  # there is no place to check the open-channels, unless i check all other chains on mintscan. so upload config first then query via hermes
+]
