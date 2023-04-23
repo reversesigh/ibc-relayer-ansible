@@ -33,8 +33,8 @@
         src: '/tmp/hermes'
         dest: '/usr/local/bin/'
         remote_src: true
-        owner: root
-        group: root
+        owner: '{{ ansible_user }}'
+        group: '{{ ansible_user }}'
         mode: 755
 
     - name: make hermes dir

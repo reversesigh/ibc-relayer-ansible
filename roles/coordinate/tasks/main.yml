@@ -1,0 +1,70 @@
+---
+- name: save relayer configs
+  run_once: true
+  block:
+    - name: change ansible_host to main relayer server
+      set_fact:
+        host_ip: '{{ ansible_host }}'
+        ansible_host: '{{ masterrelayer }}'
+
+    - name: compress relayer configs
+      archive:
+        path: '{{ item.0 }}'
+        dest: '{{ item.1 }}'
+        remove: false
+        format: gz
+      loop:
+        - ['{{ user_dir }}/.relayer', 'relayer.gz']
+        - ['{{ user_dir }}/.hermes', 'hermes.gz']
+
+    - name: fetch compressed configs to localhost
+      fetch: 
+        src: '{{ item }}'
+        dest: ~/Downloads/
+        flat: true
+      loop:
+        - 'relayer.gz'
+        - 'hermes.gz'
+
+    - name: reset ansible_host
+      set_fact:
+        ansible_host: '{{ host_ip }}'
+
+- name: stop services
+  become: true
+  systemd:
+    name: '{{ item }}'
+    state: stopped
+    daemon_reload: yes
+    enabled: yes
+  loop:
+    - 'rly'
+    - 'hermes'
+
+- name: Copy and unarchive relayer configs
+  unarchive:
+    src: '{{ item.1 }}'
+    dest: '{{ item.0 }}'
+  loop:
+    - ['{{ user_dir }}/', '~/Downloads/relayer.gz']
+    - ['{{ user_dir }}/', '~/Downloads/hermes.gz']
+
+- name: Replace old remote ip with localhost
+  replace:
+    path: '{{ item }}'
+    regexp: '{{ ansible_host }}'
+    replace: '127.0.0.1'
+  loop:
+    - '{{ user_dir }}/.relayer/config/config.yaml'
+    - '{{ user_dir }}/.hermes/config.toml'
+
+- name: restart services
+  become: true
+  systemd:
+    name: '{{ item }}'
+    state: restarted
+    daemon_reload: yes
+    enabled: yes
+  loop:
+    - 'rly'
+    - 'hermes'

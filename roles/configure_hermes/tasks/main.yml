@@ -1,12 +1,4 @@
 ---
-- name: install hermes
-  import_tasks: install_hermes.yml
-
-- name: set response as json
-  set_fact:
-    prefixes: '{{ port_prefixes.content | from_json }}'
-  when: port_prefix_url is defined
-
 - name: copy hermes config script
   template:
     src: '{{ target }}.toml.j2'

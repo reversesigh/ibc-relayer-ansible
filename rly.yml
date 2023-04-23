@@ -4,4 +4,4 @@
   gather_facts: false
   become: true
   roles:
-    - rly_install
+    - rly

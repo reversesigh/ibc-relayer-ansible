@@ -1,0 +1,26 @@
+---
+- name: Clone node repo
+  git:
+    repo: '{{ rly_repo }}'
+    dest: '{{ user_dir }}/rly'
+    version: '{{ rly_version }}'
+    update: yes
+    force: yes
+    recursive: no
+
+- name: Change go folder permission
+  become: true
+  file:
+    path: '{{ user_dir }}/go'
+    owner: '{{ ansible_user }}'
+    group: '{{ ansible_user }}'
+    recurse: true
+    mode: '0755'
+
+- name: Install node
+  command: 'make install'
+  args:
+    chdir: '{{ user_dir }}/rly'
+  environment:
+    PATH: '{{ path }}'
+    GOPATH: '{{ user_dir }}/go'

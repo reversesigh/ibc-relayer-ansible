@@ -1,12 +1,22 @@
 ---
-- name: Main
-  hosts: all
+- name: Install relayer daemons
+  hosts: 'all'
   gather_facts: false
   vars_files:
     - 'group_vars/{{ target }}.yml'
   roles:
-    - define_ports
-    - rly
-    - hermes
-    - coordinate
+    - install_rly
+    - install_hermes
 
+- name: Configure relayer
+  hosts: 'ibc-relayer'
+  gather_facts: false
+  roles:
+    - define_ports
+    - configure_hermes
+
+- name: Coordinate relayers
+  hosts: all
+  gather_facts: false
+  roles:
+    - coordinate
