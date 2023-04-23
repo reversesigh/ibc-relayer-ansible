@@ -15,28 +15,3 @@
     marker_begin: 'Begin block: {{ item.key }}'
     marker_end: 'End block: {{ item.key }}'
   with_dict: '{{ supported_networks }}'
-
-- name: create hermes systemd unit
-  become: true
-  template:
-    src: 'hermes.service.j2'
-    dest: '/etc/systemd/system/hermes.service'
-    owner: root
-    group: root
-    mode: '600'
-
-- name: open hermes telemetry port
-  become: true
-  ufw:
-    rule: allow
-    proto: tcp
-    port: '{{ telemetry_port }}'
-
-- name: start hermes service
-  become: true
-  systemd:
-    name: 'hermes'
-    state: restarted
-    daemon_reload: yes
-    enabled: yes
-  changed_when: false

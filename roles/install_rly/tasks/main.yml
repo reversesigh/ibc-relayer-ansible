@@ -1,7 +1,7 @@
 ---
-# - name: install rly
-#   import_tasks: install_rly.yml
-#   ignore_errors: true
+- name: install rly
+  import_tasks: install_rly.yml
+  ignore_errors: true
 
 - name: create rly systemd unit
   become: true

@@ -1,5 +1,5 @@
 ---
-- name: Clone node repo
+- name: Clone rly repo
   git:
     repo: '{{ rly_repo }}'
     dest: '{{ user_dir }}/rly'
@@ -17,7 +17,7 @@
     recurse: true
     mode: '0755'
 
-- name: Install node
+- name: Install rly
   command: 'make install'
   args:
     chdir: '{{ user_dir }}/rly'

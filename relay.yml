@@ -2,10 +2,8 @@
 - name: Install relayer daemons
   hosts: 'all'
   gather_facts: false
-  vars_files:
-    - 'group_vars/{{ target }}.yml'
   roles:
-    - install_rly
+    # - install_rly
     - install_hermes
 
 - name: Configure relayer
