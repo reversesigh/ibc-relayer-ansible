@@ -4,11 +4,11 @@
 
 - name: check if hermes is already installed
   stat:
-    path: '{{ ansible_user }}/.cargo/bin/hermes'
+    path: '{{ user_dir }}/.cargo/bin/hermes'
   register: hermes    
 
 - name: check if current hermes version is already installed
-  command: '{{ ansible_user }}/.cargo/bin/hermes version'
+  command: '{{ user_dir }}/.cargo/bin/hermes version'
   register: hermes_output
   when: hermes.stat.exists
   ignore_errors: true

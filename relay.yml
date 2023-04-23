@@ -1,9 +1,9 @@
 ---
 - name: Install relayer daemons
-  hosts: 'all'
+  hosts: all
   gather_facts: false
   roles:
-    # - install_rly
+    - install_rly
     - install_hermes
 
 - name: Configure relayer

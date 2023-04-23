@@ -17,6 +17,15 @@
         - ['{{ user_dir }}/.relayer', 'relayer.gz']
         - ['{{ user_dir }}/.hermes', 'hermes.gz']
 
+    - name: remove old compressed configs
+      delegate_to: localhost
+      file: 
+        path: '~/Downloads/{{ item }}'
+        state: absent
+      loop: 
+        - 'relayer.gz'
+        - 'hermes.gz'
+
     - name: fetch compressed configs to localhost
       fetch: 
         src: '{{ item }}'
@@ -46,8 +55,8 @@
     src: '{{ item.1 }}'
     dest: '{{ item.0 }}'
   loop:
-    - ['{{ user_dir }}/', '~/Downloads/relayer.gz']
-    - ['{{ user_dir }}/', '~/Downloads/hermes.gz']
+    - ['{{ user_dir }}', '~/Downloads/relayer.gz']
+    - ['{{ user_dir }}', '~/Downloads/hermes.gz']
 
 - name: Replace old remote ip with localhost
   replace:
