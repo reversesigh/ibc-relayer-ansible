@@ -2,16 +2,6 @@
 - name: install hermes
   import_tasks: install_hermes.yml
 
-- name: get port prefixes
-  uri:
-    url: '{{ port_prefix_url }}'
-    method: GET
-    return_content: true
-    status_code: 200
-    body_format: json
-  register: port_prefixes
-  when: port_prefix_url is defined
-
 - name: set response as json
   set_fact:
     prefixes: '{{ port_prefixes.content | from_json }}'

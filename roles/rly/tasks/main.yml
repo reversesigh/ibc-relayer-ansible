@@ -1,0 +1,21 @@
+---
+- name: install rly
+  import_tasks: install_rly.yml
+
+- name: create rly systemd unit
+  become: true
+  copy:
+    src: rly.service.j2
+    dest: /etc/systemd/system/rly.service
+    owner: root
+    group: root
+    mode: '0600'
+
+- name: start rly service
+  become: true
+  systemd:
+    name: rly
+    state: restarted
+    daemon_reload: yes
+    enabled: yes
+  changed_when: false
