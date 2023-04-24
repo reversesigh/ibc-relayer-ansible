@@ -50,6 +50,14 @@
     - 'rly'
     - 'hermes'
 
+- name: remove old configs
+  file: 
+    path: '{{ user_dir }}/{{ item }}'
+    state: absent
+  loop: 
+    - '.relayer'
+    - '.hermes'
+
 - name: Copy and unarchive relayer configs
   unarchive:
     src: '{{ item.1 }}'
