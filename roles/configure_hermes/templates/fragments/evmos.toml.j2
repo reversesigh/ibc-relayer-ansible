@@ -1,5 +1,6 @@
 [[chains]]
 id = 'evmos_9001-2'
+extension_options = [ { type = "ethermint_dynamic_fee", value = "0" }]
 {% include 'ports.toml.j2' %}
 
 rpc_timeout = '20s'
@@ -9,7 +10,7 @@ store_prefix = 'ibc'
 address_type = { derivation = 'ethermint', proto_type = { pk_type = '/ethermint.crypto.v1.ethsecp256k1.PubKey' } }
 default_gas = 400000
 max_gas = 4000000
-gas_price = { price = 25000000000, denom = 'aevmos' }
+gas_price = { price = 80000000000, denom = 'aevmos' }
 gas_multiplier = 1.2
 max_msg_num = 15
 max_tx_size = 2097152
