@@ -9,7 +9,7 @@ address_type = { derivation = 'cosmos' }
 store_prefix = 'ibc'
 default_gas = 100000000
 max_gas = 110000000
-gas_price = { price = 0.0001, denom = 'usc' }
+gas_price = { price = 1, denom = 'SWTH' }
 gas_multiplier = 1.2
 max_msg_num = 30
 max_tx_size = 8388608
@@ -21,5 +21,4 @@ trust_threshold = { numerator = '1', denominator = '3' }
 
 [chains.packet_filter]
 policy = 'allow'
-list = [
-]
+list = []
