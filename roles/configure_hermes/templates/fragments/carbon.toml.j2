@@ -1,6 +1,12 @@
 [[chains]]
 id = 'carbon-1'
-{% include 'ports.toml.j2' %}
+
+{% set rpc_port = prefixes[item.key]|string + '57' if port_prefix_url is defined else default_rpc %}
+{% set grpc_port = 9090 %}
+rpc_addr = 'http://{{ item.value.ip }}:{{ rpc_port }}'
+grpc_addr = 'http://{{ item.value.ip }}:{{ grpc_port }}'
+websocket_addr = 'ws://{{ item.value.ip }}:{{ rpc_port }}/websocket'
+
 
 rpc_timeout = '20s'
 account_prefix = 'swth'

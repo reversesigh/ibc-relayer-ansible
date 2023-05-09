@@ -1,18 +1,18 @@
 [[chains]]
-id = 'quasar-1'
+id = 'sommelier-3'
 {% include 'ports.toml.j2' %}
 
 rpc_timeout = '20s'
-account_prefix = 'quasar'
+account_prefix = 'somm'
 key_name = 'relayer'
-store_prefix = 'ibc'
 address_type = { derivation = 'cosmos' }
-default_gas = 150000
-max_gas = 3000000
-gas_price = { price = 0.000, denom = 'ibc/0471F1C4E7AFD3F07702BEF6DC365268D64570F7C1FDC98EA6098DD6DE59817B' }
-gas_multiplier = 1.2
+store_prefix = 'ibc'
+default_gas = 500000
+max_gas = 20000000
+gas_price = { price = 0.01, denom = 'usomm' }
+gas_multiplier = 1.8
 max_msg_num = 30
-max_tx_size = 2097152
+max_tx_size = 1800000
 clock_drift = '15s'
 max_block_time = '10s'
 trusting_period = '7days'
@@ -22,6 +22,6 @@ trust_threshold = { numerator = '1', denominator = '3' }
 [chains.packet_filter]
 policy = 'allow'
 list = [
-  ['transfer', 'channel-0'], # Cosmos
-  ['transfer', 'channel-1'], # Osmosis
+  ['transfer', 'channel-1'], # Injective
+  ['transfer', 'channel-0'], # Osmosis
 ]
