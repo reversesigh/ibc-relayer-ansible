@@ -1,0 +1,63 @@
+---
+- name: install rust
+  import_tasks: install_rust.yml
+
+- name: check if hermes is already installed
+  stat:
+    path: '{{ user_dir }}/.cargo/bin/hermes'
+  register: hermes    
+
+- name: check if current hermes version is already installed
+  command: '{{ user_dir }}/.cargo/bin/hermes version'
+  register: hermes_output
+  when: hermes.stat.exists
+  ignore_errors: true
+
+- name: hermes output
+  debug:
+    var: hermes_output.stdout
+
+- name: download and install hermes
+  when: not hermes.stat.exists or hermes_version not in hermes_output.stdout
+  block:
+    - name: Set rust environment
+      command: 'rustup default stable'
+      environment:
+        PATH: '{{ path }}'
+
+    - name: Install hermes
+      command: 'cargo install ibc-relayer-cli --bin hermes'
+      environment:
+        PATH: '{{ path }}'
+
+    - name: make hermes dir
+      file:
+        path: '/home/{{ ansible_user }}/.hermes/'
+        owner: '{{ ansible_user }}'
+        group: '{{ ansible_user }}'
+        state: directory
+
+- name: create hermes systemd unit
+  become: true
+  template:
+    src: 'hermes.service.j2'
+    dest: '/etc/systemd/system/hermes.service'
+    owner: root
+    group: root
+    mode: '600'
+
+- name: open hermes telemetry port
+  become: true
+  ufw:
+    rule: allow
+    proto: tcp
+    port: '{{ telemetry_port }}'
+
+- name: start hermes service
+  become: true
+  systemd:
+    name: 'hermes'
+    state: restarted
+    daemon_reload: yes
+    enabled: yes
+  changed_when: false

@@ -1,0 +1,35 @@
+[[chains]]
+id = 'core-1'
+rpc_addr = 'https://rpc.core.persistence.one:443'
+grpc_addr = 'https://grpc.core.persistence.one:443'
+websocket_addr = 'wss://rpc.core.persistence.one:443/websocket'
+
+rpc_timeout = '10s'
+account_prefix = 'persistence'
+key_name = 'relayer'
+store_prefix = 'ibc'
+default_gas = 100000
+max_gas = 1000000
+gas_price = { price = 0.025, denom = 'uxprt' }
+#gas_adjustment = 0.1
+gas_multiplier = 1.2
+max_msg_num = 30
+max_tx_size = 2000000
+clock_drift = '5s'
+max_block_time = '10s'
+trusting_period = '14days'
+trust_threshold = { numerator = '1', denominator = '3' }
+address_type = { derivation = 'cosmos' }
+
+memo_prefix = '{{ memo }}'
+
+[chains.packet_filter]
+policy = 'allow'
+list = [
+  ['transfer', 'channel-82'], # secret
+  ['transfer', 'channel-67'], # Stride
+  ['transfer', 'channel-41'], # Injective
+  ['transfer', 'channel-72'], # Kujira
+  ['transfer', 'channel-71'], # comdex
+  ['transfer', 'channel-73'], # quicksilver
+]

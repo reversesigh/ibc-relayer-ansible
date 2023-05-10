@@ -1,8 +1,9 @@
 ---
 - name: Main
-  hosts: 'relayer'
+  hosts: {{ target }}
   gather_facts: false
   vars_files:
     - 'group_vars/{{ target }}.yml'
   roles:
+    - define_ports
     - hermes

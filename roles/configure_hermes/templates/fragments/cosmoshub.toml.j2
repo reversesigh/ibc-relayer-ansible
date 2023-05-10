@@ -1,0 +1,38 @@
+[[chains]]
+id = 'cosmoshub-4'
+{% include 'ports.toml.j2' %}
+
+rpc_timeout = '20s'
+account_prefix = 'cosmos'
+key_name = 'relayer'
+address_type = { derivation = 'cosmos' }
+store_prefix = 'ibc'
+default_gas = 200000
+max_gas = 3500000
+gas_price = { price = 0.0025, denom = 'uatom' }
+gas_multiplier = 2
+max_msg_num = 30
+max_tx_size = 180000
+clock_drift = '10s'
+max_block_time = '10s'
+trusting_period = '14days'
+memo_prefix = '{{ memo }}'
+trust_threshold = { numerator = '1', denominator = '3' }
+
+[chains.packet_filter]
+policy = 'allow'
+list = [
+  ['transfer', 'channel-141'], # Osmosis
+  ['transfer', 'channel-207'], # Juno
+  ['transfer', 'channel-235'], # Secret
+  ['transfer', 'channel-292'], # Evmos
+  ['transfer', 'channel-343'], # Kujira
+  ['transfer', 'channel-534'], # Quasar
+  ['transfer', 'channel-540'], # Huahua
+
+  ['transfer',       'channel-391'], # Stride
+  ['ica.delegation', 'channel-396'],
+  ['ica.fee',        'channel-395'],
+  ['ica.withdrawal', 'channel-392'],
+  ['ica.redemption', 'channel-393'],
+]

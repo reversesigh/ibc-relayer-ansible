@@ -1,0 +1,14 @@
+[Unit]
+Description=Hermes IBC relayer for {{ target }}
+After=network.target
+
+[Service]
+Type=simple
+User={{ ansible_user }}
+ExecStart={{ user_dir }}/.cargo/bin/hermes --config {{ user_dir }}/.hermes/config.toml start
+RuntimeMaxSec=21600
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

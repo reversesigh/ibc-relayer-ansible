@@ -1,0 +1,30 @@
+[[chains]]
+id = 'carbon-1'
+
+{% set rpc_port = prefixes[item.key]|string + '57' if port_prefix_url is defined else default_rpc %}
+{% set grpc_port = 9090 %}
+rpc_addr = 'http://{{ item.value.ip }}:{{ rpc_port }}'
+grpc_addr = 'http://{{ item.value.ip }}:{{ grpc_port }}'
+websocket_addr = 'ws://{{ item.value.ip }}:{{ rpc_port }}/websocket'
+
+
+rpc_timeout = '20s'
+account_prefix = 'swth'
+key_name = 'relayer'
+address_type = { derivation = 'cosmos' }
+store_prefix = 'ibc'
+default_gas = 100000000
+max_gas = 110000000
+gas_price = { price = 1, denom = 'SWTH' }
+gas_multiplier = 1.2
+max_msg_num = 30
+max_tx_size = 8388608
+clock_drift = '20s'
+max_block_time = '10s'
+trusting_period = '20days'
+memo_prefix = '{{ memo }}'
+trust_threshold = { numerator = '1', denominator = '3' }
+
+[chains.packet_filter]
+policy = 'allow'
+list = []

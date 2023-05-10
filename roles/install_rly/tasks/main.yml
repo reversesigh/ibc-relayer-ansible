@@ -1,0 +1,22 @@
+---
+- name: install rly
+  import_tasks: install_rly.yml
+  ignore_errors: true
+
+- name: create rly systemd unit
+  become: true
+  template:
+    src: rly.service.j2
+    dest: /etc/systemd/system/rly.service
+    owner: '{{ ansible_user }}'
+    group: '{{ ansible_user }}'
+    mode: '0600'
+
+- name: start rly service
+  become: true
+  systemd:
+    name: rly
+    state: restarted
+    daemon_reload: yes
+    enabled: yes
+  changed_when: false
