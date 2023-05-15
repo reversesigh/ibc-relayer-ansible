@@ -1,0 +1,30 @@
+[[chains]]
+id = 'neutron-1'
+{% include 'ports.toml.j2' %}
+
+rpc_timeout = '20s'
+account_prefix = 'neutron'
+key_name = 'relayer'
+store_prefix = 'ibc'
+address_type = { derivation = 'cosmos' }
+default_gas = 150000
+max_gas = 3000000
+gas_price = { price = 0.05, denom = 'ibc/C4CFF46FD6DE35CA4CF4CE031E643C8FDC9BA4B99AE598E9B0ED98FE3A2319F9' }
+gas_multiplier = 1.2
+max_msg_num = 30
+max_tx_size = 2097152
+clock_drift = '15s'
+max_block_time = '10s'
+trusting_period = '14days'
+memo_prefix = '{{ memo }}'
+trust_threshold = { numerator = '1', denominator = '3' }
+
+[chains.packet_filter]
+policy = 'allow'
+list = [
+  ['provider', 'channel-0'], # Cosmos - ICS
+
+  ['transfer', 'channel-1'], # Cosmos - Transfer
+  ['transfer', 'channel-3'], # kujira
+
+]
