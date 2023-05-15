@@ -22,7 +22,7 @@ trust_threshold = { numerator = '1', denominator = '3' }
 [chains.packet_filter]
 policy = 'allow'
 list = [
-  ['provider', 'channel-0'], # Cosmos - ICS
+  ['consumer', 'channel-0'], # Cosmos - ICS
 
   ['transfer', 'channel-1'], # Cosmos - Transfer
   ['transfer', 'channel-3'], # kujira
